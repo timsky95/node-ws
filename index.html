@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知行学社 — 行稳人生每一步</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg: #0f2b1f; /* 深墨绿 */
+            --panel: #112f23;
+            --gold: #c79a2e; /* 暗金 */
+            --gold-soft: #d4b56a;
+            --muted: #cfcfcf;
+            --white: #f7f6f2;
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        html,body{height:100%;}
+        body{
+            font-family: 'Noto Sans SC', Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #071612 0%, var(--panel) 100%);
+            color:var(--muted);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.6;
+        }
+        .container{width:90%;max-width:1100px;margin:0 auto}
+
+        header{
+            position:sticky;top:0;z-index:60;padding:18px 0;background:rgba(6,20,14,0.45);backdrop-filter: blur(6px);border-bottom:1px solid rgba(199,154,46,0.06);
+        }
+        .nav{display:flex;align-items:center;justify-content:space-between}
+        .brand{display:flex;align-items:center;gap:14px;color:var(--gold)}
+        .brand .logo{
+            width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--gold) 0%, #96722a 100%);display:flex;align-items:center;justify-content:center;color:#08140c;font-weight:700;font-family:'Noto Serif SC';box-shadow:0 4px 14px rgba(0,0,0,0.4)
+        }
+        .brand .title{font-size:1.1rem;font-weight:700}
+        nav ul{display:flex;gap:20px;list-style:none}
+        nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:6px;font-weight:500}
+        nav a:hover{color:var(--white);background:rgba(199,154,46,0.06)}
+        .mobile-toggle{display:none;font-size:1.3rem;color:var(--muted);cursor:pointer}
+
+        /* Hero */
+        .hero{min-height:72vh;display:flex;align-items:center}
+        .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
+        .hero-left h1{font-family:'Noto Serif SC';font-size:2.4rem;color:var(--gold);margin-bottom:12px}
+        .hero-left p{color:var(--muted);margin-bottom:18px}
+        .cta-row{display:flex;gap:12px}
+        .btn{display:inline-block;padding:12px 20px;border-radius:28px;background:var(--gold);color:#08140c;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+        .btn.ghost{background:transparent;border:1px solid rgba(199,154,46,0.12);color:var(--muted)}
+
+        .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+        .hero-card h3{color:var(--white);margin-bottom:8px;font-size:1.05rem}
+        .hero-card p{font-size:0.95rem;color:var(--muted)}
+
+        section{padding:60px 0}
+        .section-title{text-align:center;margin-bottom:36px}
+        .section-title h2{color:var(--gold);font-family:'Noto Serif SC';font-size:1.6rem}
+        .section-title p{color:var(--muted);max-width:760px;margin:8px auto}
+
+        /* story */
+        .story{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+        .story .story-img{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+        .story .story-img img{width:100%;display:block}
+        .story .story-text h3{color:var(--white);margin-bottom:12px}
+
+        /* cards */
+        .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .card{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+        .card h4{color:var(--gold);margin-bottom:8px}
+        .card p{color:var(--muted);font-size:0.95rem}
+
+        /* articles preview */
+        .articles{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+        .article{display:flex;gap:12px;background:rgba(255,255,255,0.01);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+        .article img{width:140px;height:92px;object-fit:cover;border-radius:8px}
+        .article h5{color:var(--white);margin-bottom:6px}
+        .meta{font-size:0.85rem;color:#9aa79a}
+
+        /* subscribe */
+        .subscribe{display:flex;gap:12px;align-items:center;justify-content:center}
+        .subscribe input{padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);min-width:280px}
+        .subscribe button{padding:12px 16px;border-radius:8px;background:var(--gold);border:none;color:#08140c;font-weight:700}
+
+        footer{background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));padding:36px 0;margin-top:24px;border-top:1px solid rgba(199,154,46,0.04)}
+        .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+        .small{font-size:0.88rem;color:#9aa79a}
+
+        /* responsive */
+        @media(max-width:1000px){
+            .hero-inner{grid-template-columns:1fr}
+            .story{grid-template-columns:1fr}
+            .cards{grid-template-columns:1fr}
+            .articles{grid-template-columns:1fr}
+            .footer-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:720px){
+            nav ul{display:none;position:absolute;top:68px;left:0;right:0;background:var(--panel);flex-direction:column;padding:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px}
+            nav ul.show{display:flex}
+            .mobile-toggle{display:block}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="brand">
+                <div class="logo">知</div>
+                <div>
+                    <div class="title">知行学社</div>
+                    <div style="font-size:12px;color:var(--muted)">分享学校未曾教过的知识，行稳人生每一步</div>
+                </div>
+            </div>
+            <nav>
+                <div class="mobile-toggle" id="toggle">☰</div>
+                <ul id="navlist">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#story">故事</a></li>
+                    <li><a href="#philosophy">哲学与心理</a></li>
+                    <li><a href="#articles">随笔与实用</a></li>
+                    <li><a href="#join">加入我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <h1>知行合一 以智应变 以行证知</h1>
+                    <p>这是一个将现代心理学与东方智慧结合的自媒体学社
+                    我们在这里讲故事 讲方法 讲那些学校不曾教过的生存智慧
+                    让人在复杂世界里走得更稳 更有深度</p>
+                    <div class="cta-row">
+                        <a class="btn" href="#join">关注我们</a>
+                        <a class="btn ghost" href="#articles">阅读随笔</a>
+                    </div>
+                </div>
+                <aside class="hero-card">
+                    <h3>本周推荐</h3>
+                    <p>《如何与有隐藏情绪的人建立信任》—— 从倾听与共情出发，构建真实连接的实操方法</p>
+                    <p style="margin-top:10px;font-size:13px;color:#bfcfb8">新文章 · 5 分钟阅读</p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Story -->
+        <section id="story">
+            <div class="section-title">
+                <h2>一个关于知行的故事</h2>
+                <p>故事先行 然后引申哲理 这是我们呈现内容的一贯方式</p>
+            </div>
+            <div class="story">
+                <div class="story-img">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80" alt="古道茶馆">
+                </div>
+                <div class="story-text">
+                    <h3>老学者与少年</h3>
+                    <p>有一位年轻人日日苦学，读《论语》《庄子》，却仍在现实面前踟蹰不前
+                    他来到一位老学者门下求教，老者没有立刻讲大道理
+                    只让他两个月内每天做一件小事 并记录下变化
+                    两个月后 少年发现自己的注意力更沉稳 人际应对更自然 终能将书本里的智慧用于生活
+                    老者说 读书是养分 行动才是血肉 有时你需要先去做 再回来问书本为什么生效
+                    </p>
+                    <p style="margin-top:12px;color:var(--muted)">—— 这便是知与行的悖论 也是我们想传递的实践路径</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy & Psychology -->
+        <section id="philosophy">
+            <div class="section-title">
+                <h2>哲学 与 心理学</h2>
+                <p>用现代科学检验古老智慧，用东方哲思照亮当下人生</p>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <h4>倾听的技术</h4>
+                    <p>如何让对方愿意说真心话 而不是你想听的故事 我们拆解倾听中的框架与语言技巧</p>
+                </div>
+                <div class="card">
+                    <h4>情绪的回路</h4>
+                    <p>情绪不是敌人 它们是信息 我们教你识别触发点 与自己和解</p>
+                </div>
+                <div class="card">
+                    <h4>东方策略</h4>
+                    <p>从《易经》《孙子》提取可操作的决策模型，结合现代案例讲解落地方法</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles -->
+        <section id="articles">
+            <div class="section-title">
+                <h2>随笔与实用技巧</h2>
+                <p>短文与长文并存，每篇都力求可读、可用、可传播</p>
+            </div>
+            <div class="articles">
+                <a class="article" href="#">
+                    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" alt="article">
+                    <div>
+                        <h5>如何在对话中建立边界</h5>
+                        <div class="meta">心理学 · 6 分钟 · 2025-11-12</div>
+                        <p style="margin-top:8px;color:var(--muted)">设置边界并非高墙，而是让你在关系中保持完整的可持续方法</p>
+                    </div>
+                </a>
+                <a class="article" href="#">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="article">
+                    <div>
+                        <h5>从知行说起：小习惯的力量</h5>
+                        <div class="meta">哲学 · 5 分钟 · 2025-10-30</div>
+                        <p style="margin-top:8px;color:var(--muted)">把宏大的信念拆成可执行的日常行为，你会看到稳定的成长</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Join -->
+        <section id="join">
+            <div class="section-title">
+                <h2>加入知行学社</h2>
+                <p>留下邮箱，我们会把最新文章与活动推送给你。也可关注我们的视频号获取短视频干货。</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:18px">
+                <div class="subscribe">
+                    <input id="email" placeholder="你的邮箱，例如：name@example.com">
+                    <button id="subscribeBtn">订阅</button>
+                </div>
+                <div style="font-size:0.95rem;color:var(--muted)">或通过下方方式关注我们</div>
+                <div style="display:flex;gap:12px">
+                    <a class="btn" href="#">微信公众号</a>
+                    <a class="btn" href="#">视频号</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div style="font-weight:700;color:var(--gold);margin-bottom:8px">知行学社</div>
+                    <div class="small">分享学校未曾教过的知识，行稳人生每一步</div>
+                </div>
+                <div>
+                    <div style="font-weight:700;color:var(--gold);margin-bottom:8px">栏目</div>
+                    <div class="small">故事 · 哲学 · 心理学 · 实用技巧</div>
+                </div>
+                <div>
+                    <div style="font-weight:700;color:var(--gold);margin-bottom:8px">联系</div>
+                    <div class="small">邮箱: contact@zhixing.example</div>
+                    <div class="small">微博 / 视频号 / 微信公众号</div>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:18px;color:#8c9b8f;font-size:13px">© 2025 知行学社 · 保留所有权利</div>
+        </div>
+    </footer>
+
+    <script>
+        // mobile nav
+        const toggle = document.getElementById('toggle');
+        const navlist = document.getElementById('navlist');
+        toggle && toggle.addEventListener('click', ()=>{navlist.classList.toggle('show')});
+
+        // smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){
+            const target = this.getAttribute('href');
+            if(!target || target === '#') return;
+            const el = document.querySelector(target);
+            if(el){
+                e.preventDefault();
+                const top = el.offsetTop - 72;
+                window.scrollTo({top,behavior:'smooth'});
+                navlist.classList.remove('show');
+            }
+        })});
+
+        // simple subscribe demo
+        document.getElementById('subscribeBtn').addEventListener('click', ()=>{
+            const email = document.getElementById('email').value.trim();
+            if(!email || email.indexOf('@')===-1 || email.indexOf('.')===-1){
+                alert('请填写有效邮箱');return;
+            }
+            // 前端示范：实际可接后端API或邮件服务
+            alert('感谢订阅，已收到：' + email);
+            document.getElementById('email').value='';
+        });
+    </script>
+</body>
+</html>
